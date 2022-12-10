@@ -1,0 +1,7 @@
+black
+jupyter-black
+flake8
+mypy
+pytest
+coverage
+tox

@@ -1,0 +1,6 @@
+numpy
+pyarrow
+pandas
+protobuf
+requests
+websocket-client
