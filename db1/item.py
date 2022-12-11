@@ -7,12 +7,12 @@ from db1.serializer._types import PY_TYPES_
 
 
 class Item:
-    def __init__(self, path: str):
-        self.path = path
+    def __init__(self, key: str):
+        self.key = key
 
     def __repr__(self) -> str:
         repr_string = (
-            f"DB1 Item with path: `{self.path}`\n" f"Check it out at: {self.url}"
+            f"DB1 Item with key: `{self.key}`\n" f"Check it out at: {self.url}"
         )
         return repr_string
 
@@ -22,7 +22,7 @@ class Item:
         Raises:
             db1.api.exceptions.AlreadyExistsError: If the item already exists.
         """
-        item.create(self.path)
+        item.create(self.key)
 
     def delete(self) -> None:
         """Delete the item.
@@ -30,7 +30,7 @@ class Item:
         Raises:
             db1.api.exceptions.NotFoundError: If the item does not exist.
         """
-        item.delete(self.path)
+        item.delete(self.key)
 
     def get_value(self, max_size_bytes: Optional[int] = None) -> PY_TYPES_:
         """Get the value of the item.
@@ -47,7 +47,7 @@ class Item:
             db1.api.exceptions.ItemValueTooBigError:
                 If the item value is bigger than `max_size_bytes`.
         """
-        return item.get_value(self.path, max_size_bytes=max_size_bytes)
+        return item.get_value(self.key, max_size_bytes=max_size_bytes)
 
     def set_value(self, value: PY_TYPES_) -> None:
         """Set the value of the item.
@@ -55,7 +55,7 @@ class Item:
         Args:
             value: The value to set.
         """
-        item.set_value(self.path, value)
+        item.set_value(self.key, value)
 
     def get_meta_variables(self) -> dict:
         """Get the meta variables of the item.
@@ -66,7 +66,7 @@ class Item:
         Raises:
             db1.api.exceptions.NotFoundError: If the item does not exist.
         """
-        return item.get_meta_variables(self.path)
+        return item.get_meta_variables(self.key)
 
     def await_next_value(self) -> PY_TYPES_:
         """Wait for the next value of the item.
@@ -79,7 +79,7 @@ class Item:
             db1.api.exceptions.ItemValueTooBigError:
                 If the item value is bigger than `max_size_bytes`.
         """
-        return item.await_next_value(self.path)
+        return item.await_next_value(self.key)
 
     def listen(
         self,
@@ -108,7 +108,7 @@ class Item:
                 If the item value is bigger than `max_size_bytes`.
         """
         item.listen(
-            self.path,
+            self.key,
             on_set_value=on_set_value,
             on_create=on_create,
             on_delete=on_delete,
@@ -124,7 +124,7 @@ class Item:
         Returns:
             The URL of the item.
         """
-        return f"https://panel.db1.io/?path={self.path}"
+        return f"https://panel.db1.io/?key={self.key}"
 
     @property
     def val(self) -> PY_TYPES_:
