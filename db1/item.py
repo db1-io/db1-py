@@ -3,11 +3,21 @@
 from typing import Callable, Optional
 
 from db1.api import item
+from db1.api.item._utils import assert_valid_key
 from db1.serializer._types import PY_TYPES_
 
 
 class Item:
     def __init__(self, key: str):
+        """Create an Item object.
+
+        Args:
+            key: The key of the item.
+
+        Raises:
+            db1.api.exceptions.InvalidKeyError: If the key is invalid.
+        """
+        assert_valid_key(key)
         self.key = key
 
     def __repr__(self) -> str:

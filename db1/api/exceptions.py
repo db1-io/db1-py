@@ -37,3 +37,7 @@ class WebSocketClosedError(DB1ApiError):
 
 class ItemValueTooBigError(DB1ApiError):
     """Used to indicate that an item value is larger than `max_size_bytes`."""
+
+
+class InvalidKeyError(DB1ApiError):
+    """Used to indicate that a resource ID is invalid."""
