@@ -25,7 +25,7 @@ def create_request(resource_id: str):
     response = pb.CreateResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.CreateResponse.Status.ALREADY_EXISTS:
         raise exceptions.AlreadyExistsError(
@@ -46,7 +46,7 @@ def delete_request(resource_id: str):
     response = pb.DeleteResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.DeleteResponse.Status.NOT_FOUND:
         raise exceptions.NotFoundError(
@@ -76,7 +76,7 @@ def get_value_request(
     response = pb.GetResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.GetResponse.Status.NOT_FOUND:
         raise exceptions.NotFoundError(
@@ -111,7 +111,7 @@ def get_meta_variables_request(resource_id: str) -> Tuple:
     response = pb.GetResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.GetResponse.Status.NOT_FOUND:
         raise exceptions.NotFoundError(
@@ -146,7 +146,7 @@ def get_value_and_meta_variables_request(
     response = pb.GetResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.GetResponse.Status.NOT_FOUND:
         raise exceptions.NotFoundError(
@@ -181,7 +181,7 @@ def set_value_request(resource_id: str, item_value: bytes) -> None:
     response = pb.SetResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.SetResponse.Status.NOT_FOUND:
         raise exceptions.NotFoundError(
@@ -210,7 +210,7 @@ def update_meta_variables_request(
     response = pb.UpdateMetavariblesResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.SetResponse.Status.NOT_FOUND:
         raise exceptions.NotFoundError(
@@ -239,7 +239,7 @@ def delete_meta_variables_request(
     response = pb.UpdateMetavariblesResponse()
     response.ParseFromString(http_response.content)
 
-    check_common_status(response.common.status)
+    check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.SetResponse.Status.NOT_FOUND:
         raise exceptions.NotFoundError(

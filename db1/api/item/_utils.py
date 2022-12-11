@@ -4,11 +4,11 @@ from db1._protos import ITEM_PROTO_0v1 as pb
 from db1.api import exceptions
 
 
-def check_common_status(status: int):
+def check_common_status(status: int, message: str):
     if status == pb.CommonResponse.Status.INTERNAL_ERROR:
-        raise exceptions.InternalServerError("An internal error occured on the server.")
+        raise exceptions.InternalServerError(message)
     if status == pb.CommonResponse.Status.BAD_REQUEST:
-        raise exceptions.InternalServerError("The server received a bad request.")
+        raise exceptions.InternalServerError(message)
     if status == pb.CommonResponse.Status.OK_REQUEST:
         return
 
