@@ -76,14 +76,14 @@ def handle_operation_await_next_value(args):
 
 
 OPERATIONS = [
-    ["create", "db1 item create", handle_operation_create],
-    ["delete", "db1 item delete", handle_operation_delete],
-    ["get_value", "db1 item get_value", handle_operation_get_value],
-    ["set_value", "db1 item set_value", handle_operation_set_value],
-    ["listen", "db1 item listen", handle_operation_listen],
+    ["create", "db1 create", handle_operation_create],
+    ["delete", "db1 delete", handle_operation_delete],
+    ["get", "db1 get", handle_operation_get_value],
+    ["set", "db1 set", handle_operation_set_value],
+    ["listen", "db1 listen", handle_operation_listen],
     [
-        "await_next_value",
-        "db1 item await_next_value",
+        "await",
+        "db1 await",
         handle_operation_await_next_value,
     ],
 ]
@@ -109,7 +109,7 @@ def handle_resource_item(args):
             operation_handler[2](args)
             return
 
-    print(f"Operation `{operation}` does not exist on resource `item`.\n")
+    print(f"Operation `{operation}` does not exist.\n")
     print_available_operations()
 
 
@@ -117,14 +117,14 @@ def print_available_operations():
     print("Operations:")
     for operation_handler in OPERATIONS:
         print(f"  {operation_handler[1]}")
-    print()
+    print("\nOr try: db1 -h\n")
 
 
 def print_missing_id():
-    print("Example: \n db1 item get_value some_path\n")
+    print("Example: \n db1 get some_path\n")
     return
 
 
 def print_missing_value():
-    print("Example: \n db1 item set_value some_path 123\n")
+    print("Example: \n db1 set some_path 123\n")
     return

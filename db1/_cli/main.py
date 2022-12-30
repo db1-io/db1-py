@@ -12,12 +12,6 @@ def main():
 
     # Positional arguments
     parser.add_argument(
-        "resource",
-        type=str,
-        nargs="?",
-        help="Name of resource (e.g. item).",
-    )
-    parser.add_argument(
         "operation",
         type=str,
         nargs="?",
@@ -50,24 +44,8 @@ def main():
         print("0.1.0")
         return
 
-    resource = args["resource"]
-
-    if not resource:
-        print("Positional argument `resource` is required.\n")
-        print_available_resources()
-        print("Or try: db1 -h\n")
-        return
-
-    if resource == "item":
-        handle_resource_item(args)
-        return
-
-    print(f"Resource `{resource}` does not exist.\n")
-    print_available_resources()
-
-
-def print_available_resources():
-    print("Resources:\n" "  db1 item\n")
+    handle_resource_item(args)
+    return
 
 
 if __name__ == "__main__":
