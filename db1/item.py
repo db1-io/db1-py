@@ -3,7 +3,7 @@
 from typing import Callable, Optional
 
 from db1.api import item
-from db1.api.item._utils import assert_valid_key
+from db1.api.item._utils import assert_valid_key, assert_public_key
 from db1.serializer._types import PY_TYPES_
 
 
@@ -31,7 +31,9 @@ class Item:
 
         Raises:
             db1.api.exceptions.AlreadyExistsError: If the item already exists.
+            db1.api.exceptions.InvalidKeyError: If the key is invalid.
         """
+        assert_public_key(key)
         item.create(self.key)
 
     def delete(self) -> None:
@@ -39,7 +41,9 @@ class Item:
 
         Raises:
             db1.api.exceptions.NotFoundError: If the item does not exist.
+            db1.api.exceptions.InvalidKeyError: If the key is invalid.
         """
+        assert_public_key(key)
         item.delete(self.key)
 
     def get_value(self, max_size_bytes: Optional[int] = None) -> PY_TYPES_:
@@ -64,7 +68,11 @@ class Item:
 
         Args:
             value: The value to set.
+        
+        Raises:
+            db1.api.exceptions.InvalidKeyError: If the key is invalid.
         """
+        assert_public_key(key)
         item.set_value(self.key, value)
 
     def get_meta_variables(self) -> dict:
