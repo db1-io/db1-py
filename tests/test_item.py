@@ -23,8 +23,12 @@ def test_get_set(value):
 
 def test_invalid_key():
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
-        db1.Item("-invalid_key-")
+        item = db1.Item("-invalid_key-")
+        item.val = 'test'
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
-        db1.Item("invalid_key@")
+        item = db1.Item("invalid_key@")
+        item.val = 'test'
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
-        db1.Item("inval?d_key")
+        item = db1.Item("inval?d_key")
+        item.val = 'test'
+

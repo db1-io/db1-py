@@ -14,7 +14,7 @@ def check_common_status(status: int, message: str):
 
 
 def assert_valid_key(key: str) -> None:
-    # Check if key is valid
+    # Check if key is empty
     if not key:
         raise exceptions.InvalidKeyError("key is empty.")
 
@@ -22,12 +22,14 @@ def assert_valid_key(key: str) -> None:
     if len(key) > 100:
         raise exceptions.InvalidKeyError("key is more than 100 characters.")
 
+
+def assert_public_key(key: str) -> None:
     # Check if key dont starts with a letter or number
     if not key[0].isalnum():
-        raise exceptions.InvalidKeyError("key must start with a letter or number.")
+        raise exceptions.InvalidKeyError("Public key must start with a letter or number.")
 
     # Check if key only contains letters, numbers, -, _
     if not all(char.isalnum() or char in "-_" for char in key):
         raise exceptions.InvalidKeyError(
-            "key must contain only letters, numbers, '-' or '_'."
+            "Public key must contain only letters, numbers, '-' or '_'."
         )
