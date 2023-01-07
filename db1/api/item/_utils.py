@@ -8,7 +8,7 @@ def check_common_status(status: int, message: str):
     if status == pb.CommonResponse.Status.INTERNAL_ERROR:
         raise exceptions.InternalServerError(message)
     if status == pb.CommonResponse.Status.BAD_REQUEST:
-        raise exceptions.InternalServerError(message)
+        raise exceptions.BadRequestError(message)
     if status == pb.CommonResponse.Status.OK_REQUEST:
         return
 
