@@ -26,14 +26,6 @@ class Item:
         )
         return repr_string
 
-    def create(self) -> None:
-        """Create the item.
-
-        Raises:
-            db1.api.exceptions.AlreadyExistsError: If the item already exists.
-        """
-        item.create(self.key)
-
     def delete(self) -> None:
         """Delete the item.
 
