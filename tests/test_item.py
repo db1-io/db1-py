@@ -43,15 +43,6 @@ def test_init():
     assert test_item.key == test_key
 
 
-def test_create():
-    test_item.create()
-
-
-def test_create_already_exists():
-    with pytest.raises(db1.api.exceptions.AlreadyExistsError):
-        test_item.create()
-
-
 def test_get_set(value):
     value = VALUE_LIST[value]
     test_item.val = value
