@@ -1,4 +1,4 @@
-# db1-py
+# DB1
 
 DB1 is a simple to use cloud key-value database for storing, sharing and visualizing data items. All items are stored in the same global address space making them easily shareable with co-workers  and friends.
 
