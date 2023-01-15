@@ -6,12 +6,12 @@ with open("README.md", "r") as fh:
 setup(
     name="db1",
     version="0.1.0",
-    author="",
-    author_email="",
-    description="",
+    author="db1",
+    author_email="hello@db1.io",
+    description="DB1 Python client",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/db1-io/db1-py",
+    url="https://db1.io",
     project_urls={
         "Source Code": "https://github.com/db1-io/db1-py",
     },
