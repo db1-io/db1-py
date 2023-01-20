@@ -31,8 +31,10 @@ def create_request(resource_id: str):
         raise exceptions.AlreadyExistsError(
             f"An item with resource id `{resource_id}` already exists."
         )
+    if response.status == pb.CreateResponse.Status.INVALID_RESOURCE_ID:
+        raise exceptions.InvalidKeyError(f"The resource id `{resource_id}` is invalid.")
     if response.status == pb.CreateResponse.Status.CREATED:
-        return
+        pass
 
 
 def delete_request(resource_id: str):
@@ -52,6 +54,8 @@ def delete_request(resource_id: str):
         raise exceptions.NotFoundError(
             f"An item with resource id `{resource_id}` does not exist."
         )
+    if response.status == pb.DeleteResponse.Status.INVALID_RESOURCE_ID:
+        raise exceptions.InvalidKeyError(f"The resource id `{resource_id}` is invalid.")
     if response.status == pb.DeleteResponse.Status.DELETED:
         pass
 
@@ -187,7 +191,9 @@ def set_value_request(resource_id: str, item_value: bytes) -> None:
         raise exceptions.NotFoundError(
             f"An item with resource id `{resource_id}` does not exist."
         )
-    if response.status == pb.SetResponse.Status.UPDATED:
+    if response.status == pb.SetResponse.Status.INVALID_RESOURCE_ID:
+        raise exceptions.InvalidKeyError(f"Invalid resource id `{resource_id}`.")
+    if response.status != pb.SetResponse.Status.UPDATED:
         pass
 
     return
@@ -216,6 +222,8 @@ def update_meta_variables_request(
         raise exceptions.NotFoundError(
             f"An item with resource id `{resource_id}` does not exist."
         )
+    if response.status == pb.SetResponse.Status.INVALID_RESOURCE_ID:
+        raise exceptions.InvalidKeyError(f"Invalid resource id `{resource_id}`.")
     if response.status == pb.SetResponse.Status.UPDATED:
         pass
 
