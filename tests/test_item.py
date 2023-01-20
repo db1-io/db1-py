@@ -17,19 +17,19 @@ def value(request):
 
 
 def test_invalid_key():
-    with pytest.raises(db1.api.exceptions.InvalidKeyError):
+    with pytest.raises(db1._api.exceptions.InvalidKeyError):
         db1.Item("-invalid_key-")
-    with pytest.raises(db1.api.exceptions.InvalidKeyError):
+    with pytest.raises(db1._api.exceptions.InvalidKeyError):
         db1.Item("invalid_key@")
-    with pytest.raises(db1.api.exceptions.InvalidKeyError):
+    with pytest.raises(db1._api.exceptions.InvalidKeyError):
         db1.Item("inval?d_key")
-    with pytest.raises(db1.api.exceptions.InvalidKeyError):
+    with pytest.raises(db1._api.exceptions.InvalidKeyError):
         too_long_key = (
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         )
         db1.Item(too_long_key)
-    with pytest.raises(db1.api.exceptions.InvalidKeyError):
+    with pytest.raises(db1._api.exceptions.InvalidKeyError):
         db1.Item("")
 
 
@@ -150,10 +150,10 @@ def test_delete():
 
 
 def test_delete_not_found():
-    with pytest.raises(db1.api.exceptions.NotFoundError):
+    with pytest.raises(db1._api.exceptions.NotFoundError):
         test_item.delete()
 
 
 def test_get_not_found():
-    with pytest.raises(db1.api.exceptions.NotFoundError):
+    with pytest.raises(db1._api.exceptions.NotFoundError):
         test_item.val

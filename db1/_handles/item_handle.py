@@ -2,12 +2,14 @@
 
 from typing import Callable, Optional
 
-from db1.api import item
-from db1.api.item._utils import assert_valid_key
+from db1._api import item
+from db1._api.item._utils import assert_valid_key
 from db1.serializer._types import PY_TYPES_
 
 
 class Item:
+    """Wrapper class for easy use of the Item API."""
+
     def __init__(self, key: str):
         """Create an Item object.
 

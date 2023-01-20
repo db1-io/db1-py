@@ -2,8 +2,8 @@
 
 from typing import Any, Dict, List, Optional, Tuple
 
-from db1.api import exceptions
-from db1.api.item._rest.rest_requests import (
+from db1._api import exceptions
+from db1._api.item._rest.rest_requests import (
     create_request,
     delete_meta_variables_request,
     delete_request,

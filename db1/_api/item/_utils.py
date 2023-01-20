@@ -1,7 +1,7 @@
 """Utility functions for Item API."""
 
+from db1._api import exceptions
 from db1._protos import ITEM_PROTO_0v1 as pb
-from db1.api import exceptions
 
 
 def check_common_status(status: int, message: str):

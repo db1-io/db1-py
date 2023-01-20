@@ -3,9 +3,9 @@
 import json
 from typing import Callable, Optional
 
-from db1.api._environment_vars import DB1_API_ITEM_WEBSOCKET_URL
-from db1.api._websocket import make_ws_connection
-from db1.api.item._rest.rest_functions import get_value
+from db1._api.environment_vars import DB1_API_ITEM_WEBSOCKET_URL
+from db1._api.item._rest.rest_functions import get_value
+from db1._api.websocket_utils import make_ws_connection
 from db1.serializer._types import PY_TYPES_
 
 

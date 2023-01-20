@@ -1,6 +1,6 @@
 """Item API package."""
 
-from db1.api.item._rest.rest_functions import (
+from db1._api.item._rest.rest_functions import (
     create,
     delete,
     get_meta_variables,
@@ -8,7 +8,7 @@ from db1.api.item._rest.rest_functions import (
     get_value_and_meta_variables,
     set_value,
 )
-from db1.api.item._websocket.ws_functions import await_next_value, listen
+from db1._api.item._websocket.ws_functions import await_next_value, listen
 
 __all__ = [
     "create",
