@@ -132,10 +132,12 @@ class CreateResponse(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         ALREADY_EXISTS: CreateResponse._Status.ValueType  # 0
         CREATED: CreateResponse._Status.ValueType  # 1
+        INVALID_RESOURCE_ID: CreateResponse._Status.ValueType  # 2
 
     class Status(_Status, metaclass=_StatusEnumTypeWrapper): ...
     ALREADY_EXISTS: CreateResponse.Status.ValueType  # 0
     CREATED: CreateResponse.Status.ValueType  # 1
+    INVALID_RESOURCE_ID: CreateResponse.Status.ValueType  # 2
 
     COMMON_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -353,10 +355,12 @@ class SetResponse(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: SetResponse._Status.ValueType  # 0
         UPDATED: SetResponse._Status.ValueType  # 1
+        INVALID_RESOURCE_ID: SetResponse._Status.ValueType  # 2
 
     class Status(_Status, metaclass=_StatusEnumTypeWrapper): ...
     NOT_FOUND: SetResponse.Status.ValueType  # 0
     UPDATED: SetResponse.Status.ValueType  # 1
+    INVALID_RESOURCE_ID: SetResponse.Status.ValueType  # 2
 
     COMMON_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -460,10 +464,12 @@ class UpdateMetavariblesResponse(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: UpdateMetavariblesResponse._Status.ValueType  # 0
         UPDATED: UpdateMetavariblesResponse._Status.ValueType  # 1
+        INVALID_RESOURCE_ID: UpdateMetavariblesResponse._Status.ValueType  # 2
 
     class Status(_Status, metaclass=_StatusEnumTypeWrapper): ...
     NOT_FOUND: UpdateMetavariblesResponse.Status.ValueType  # 0
     UPDATED: UpdateMetavariblesResponse.Status.ValueType  # 1
+    INVALID_RESOURCE_ID: UpdateMetavariblesResponse.Status.ValueType  # 2
 
     COMMON_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -528,10 +534,12 @@ class DeleteResponse(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: DeleteResponse._Status.ValueType  # 0
         DELETED: DeleteResponse._Status.ValueType  # 1
+        INVALID_RESOURCE_ID: DeleteResponse._Status.ValueType  # 2
 
     class Status(_Status, metaclass=_StatusEnumTypeWrapper): ...
     NOT_FOUND: DeleteResponse.Status.ValueType  # 0
     DELETED: DeleteResponse.Status.ValueType  # 1
+    INVALID_RESOURCE_ID: DeleteResponse.Status.ValueType  # 2
 
     COMMON_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -553,3 +561,103 @@ class DeleteResponse(google.protobuf.message.Message):
     ) -> None: ...
 
 global___DeleteResponse = DeleteResponse
+
+class SubscribeToItemWSRequest(google.protobuf.message.Message):
+    """Web socket stuff"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    RESOURCE_ID_FIELD_NUMBER: builtins.int
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    resource_id: builtins.str
+    request_id: builtins.str
+    def __init__(
+        self,
+        *,
+        resource_id: builtins.str = ...,
+        request_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "request_id", b"request_id", "resource_id", b"resource_id"
+        ],
+    ) -> None: ...
+
+global___SubscribeToItemWSRequest = SubscribeToItemWSRequest
+
+class SubscribeToItemWSResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _Status:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            SubscribeToItemWSResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        NOT_FOUND: SubscribeToItemWSResponse._Status.ValueType  # 0
+        SUBSCRIBED: SubscribeToItemWSResponse._Status.ValueType  # 1
+
+    class Status(_Status, metaclass=_StatusEnumTypeWrapper): ...
+    NOT_FOUND: SubscribeToItemWSResponse.Status.ValueType  # 0
+    SUBSCRIBED: SubscribeToItemWSResponse.Status.ValueType  # 1
+
+    STATUS_FIELD_NUMBER: builtins.int
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    status: global___SubscribeToItemWSResponse.Status.ValueType
+    request_id: builtins.str
+    def __init__(
+        self,
+        *,
+        status: global___SubscribeToItemWSResponse.Status.ValueType = ...,
+        request_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "request_id", b"request_id", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___SubscribeToItemWSResponse = SubscribeToItemWSResponse
+
+class ItemEventWSPush(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _EventType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _EventTypeEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            ItemEventWSPush._EventType.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        CREATED: ItemEventWSPush._EventType.ValueType  # 0
+        UPDATED: ItemEventWSPush._EventType.ValueType  # 1
+        DELETED: ItemEventWSPush._EventType.ValueType  # 2
+
+    class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
+    CREATED: ItemEventWSPush.EventType.ValueType  # 0
+    UPDATED: ItemEventWSPush.EventType.ValueType  # 1
+    DELETED: ItemEventWSPush.EventType.ValueType  # 2
+
+    RESOURCE_ID_FIELD_NUMBER: builtins.int
+    resource_id: builtins.str
+    def __init__(
+        self,
+        *,
+        resource_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["resource_id", b"resource_id"]
+    ) -> None: ...
+
+global___ItemEventWSPush = ItemEventWSPush
