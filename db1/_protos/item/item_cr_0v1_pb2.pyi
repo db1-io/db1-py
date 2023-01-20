@@ -31,7 +31,12 @@ class CommonRequest(google.protobuf.message.Message):
         token: builtins.str = ...,
         usage_context: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["token", b"token", "usage_context", b"usage_context"]) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "token", b"token", "usage_context", b"usage_context"
+        ],
+    ) -> None: ...
 
 global___CommonRequest = CommonRequest
 
@@ -42,7 +47,12 @@ class CommonResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[CommonResponse._Status.ValueType], builtins.type):  # noqa: F821
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            CommonResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         INTERNAL_ERROR: CommonResponse._Status.ValueType  # 0
         BAD_REQUEST: CommonResponse._Status.ValueType  # 1
@@ -66,7 +76,17 @@ class CommonResponse(google.protobuf.message.Message):
         debug_message: builtins.str = ...,
         status: global___CommonResponse.Status.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["debug_message", b"debug_message", "message", b"message", "status", b"status"]) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "debug_message",
+            b"debug_message",
+            "message",
+            b"message",
+            "status",
+            b"status",
+        ],
+    ) -> None: ...
 
 global___CommonResponse = CommonResponse
 
@@ -84,8 +104,15 @@ class CreateRequest(google.protobuf.message.Message):
         common: global___CommonRequest | None = ...,
         resource_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "resource_id", b"resource_id"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "common", b"common", "resource_id", b"resource_id"
+        ],
+    ) -> None: ...
 
 global___CreateRequest = CreateRequest
 
@@ -96,7 +123,12 @@ class CreateResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[CreateResponse._Status.ValueType], builtins.type):  # noqa: F821
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            CreateResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         ALREADY_EXISTS: CreateResponse._Status.ValueType  # 0
         CREATED: CreateResponse._Status.ValueType  # 1
@@ -118,8 +150,13 @@ class CreateResponse(google.protobuf.message.Message):
         common: global___CommonResponse | None = ...,
         status: global___CreateResponse.Status.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "status", b"status"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["common", b"common", "status", b"status"],
+    ) -> None: ...
 
 global___CreateResponse = CreateResponse
 
@@ -146,8 +183,24 @@ class GetRequest(google.protobuf.message.Message):
         without_item_value: builtins.bool = ...,
         max_size_bytes: builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "max_size_bytes", b"max_size_bytes", "resource_id", b"resource_id", "without_item_value", b"without_item_value", "without_metavaribles", b"without_metavaribles"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "common",
+            b"common",
+            "max_size_bytes",
+            b"max_size_bytes",
+            "resource_id",
+            b"resource_id",
+            "without_item_value",
+            b"without_item_value",
+            "without_metavaribles",
+            b"without_metavaribles",
+        ],
+    ) -> None: ...
 
 global___GetRequest = GetRequest
 
@@ -158,7 +211,12 @@ class GetResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetResponse._Status.ValueType], builtins.type):  # noqa: F821
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            GetResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: GetResponse._Status.ValueType  # 0
         FOUND: GetResponse._Status.ValueType  # 1
@@ -180,7 +238,10 @@ class GetResponse(google.protobuf.message.Message):
             key: builtins.str = ...,
             value: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions.Literal["key", b"key", "value", b"value"],
+        ) -> None: ...
 
     COMMON_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -195,7 +256,11 @@ class GetResponse(google.protobuf.message.Message):
     status: global___GetResponse.Status.ValueType
     item_value: builtins.bytes
     @property
-    def metavaribles(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetResponse.Metavarible]: ...
+    def metavaribles(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___GetResponse.Metavarible
+    ]: ...
     size_bytes_bigger_than_max: builtins.bool
     size_bytes: builtins.int
     created_ms: builtins.int
@@ -206,14 +271,37 @@ class GetResponse(google.protobuf.message.Message):
         common: global___CommonResponse | None = ...,
         status: global___GetResponse.Status.ValueType = ...,
         item_value: builtins.bytes = ...,
-        metavaribles: collections.abc.Iterable[global___GetResponse.Metavarible] | None = ...,
+        metavaribles: collections.abc.Iterable[global___GetResponse.Metavarible]
+        | None = ...,
         size_bytes_bigger_than_max: builtins.bool = ...,
         size_bytes: builtins.int = ...,
         created_ms: builtins.int = ...,
         updated_ms: builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "created_ms", b"created_ms", "item_value", b"item_value", "metavaribles", b"metavaribles", "size_bytes", b"size_bytes", "size_bytes_bigger_than_max", b"size_bytes_bigger_than_max", "status", b"status", "updated_ms", b"updated_ms"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "common",
+            b"common",
+            "created_ms",
+            b"created_ms",
+            "item_value",
+            b"item_value",
+            "metavaribles",
+            b"metavaribles",
+            "size_bytes",
+            b"size_bytes",
+            "size_bytes_bigger_than_max",
+            b"size_bytes_bigger_than_max",
+            "status",
+            b"status",
+            "updated_ms",
+            b"updated_ms",
+        ],
+    ) -> None: ...
 
 global___GetResponse = GetResponse
 
@@ -234,8 +322,20 @@ class SetRequest(google.protobuf.message.Message):
         resource_id: builtins.str = ...,
         item_value: builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "item_value", b"item_value", "resource_id", b"resource_id"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "common",
+            b"common",
+            "item_value",
+            b"item_value",
+            "resource_id",
+            b"resource_id",
+        ],
+    ) -> None: ...
 
 global___SetRequest = SetRequest
 
@@ -246,7 +346,12 @@ class SetResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SetResponse._Status.ValueType], builtins.type):  # noqa: F821
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            SetResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: SetResponse._Status.ValueType  # 0
         UPDATED: SetResponse._Status.ValueType  # 1
@@ -268,8 +373,13 @@ class SetResponse(google.protobuf.message.Message):
         common: global___CommonResponse | None = ...,
         status: global___SetResponse.Status.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "status", b"status"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["common", b"common", "status", b"status"],
+    ) -> None: ...
 
 global___SetResponse = SetResponse
 
@@ -292,7 +402,12 @@ class UpdateMetavariblesRequest(google.protobuf.message.Message):
             value: builtins.str = ...,
             delete: builtins.bool = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["delete", b"delete", "key", b"key", "value", b"value"]) -> None: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions.Literal[
+                "delete", b"delete", "key", b"key", "value", b"value"
+            ],
+        ) -> None: ...
 
     COMMON_FIELD_NUMBER: builtins.int
     RESOURCE_ID_FIELD_NUMBER: builtins.int
@@ -301,16 +416,35 @@ class UpdateMetavariblesRequest(google.protobuf.message.Message):
     def common(self) -> global___CommonRequest: ...
     resource_id: builtins.str
     @property
-    def metavaribles(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UpdateMetavariblesRequest.Metavarible]: ...
+    def metavaribles(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___UpdateMetavariblesRequest.Metavarible
+    ]: ...
     def __init__(
         self,
         *,
         common: global___CommonRequest | None = ...,
         resource_id: builtins.str = ...,
-        metavaribles: collections.abc.Iterable[global___UpdateMetavariblesRequest.Metavarible] | None = ...,
+        metavaribles: collections.abc.Iterable[
+            global___UpdateMetavariblesRequest.Metavarible
+        ]
+        | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "metavaribles", b"metavaribles", "resource_id", b"resource_id"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "common",
+            b"common",
+            "metavaribles",
+            b"metavaribles",
+            "resource_id",
+            b"resource_id",
+        ],
+    ) -> None: ...
 
 global___UpdateMetavariblesRequest = UpdateMetavariblesRequest
 
@@ -321,7 +455,12 @@ class UpdateMetavariblesResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[UpdateMetavariblesResponse._Status.ValueType], builtins.type):  # noqa: F821
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            UpdateMetavariblesResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: UpdateMetavariblesResponse._Status.ValueType  # 0
         UPDATED: UpdateMetavariblesResponse._Status.ValueType  # 1
@@ -343,8 +482,13 @@ class UpdateMetavariblesResponse(google.protobuf.message.Message):
         common: global___CommonResponse | None = ...,
         status: global___UpdateMetavariblesResponse.Status.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "status", b"status"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["common", b"common", "status", b"status"],
+    ) -> None: ...
 
 global___UpdateMetavariblesResponse = UpdateMetavariblesResponse
 
@@ -362,8 +506,15 @@ class DeleteRequest(google.protobuf.message.Message):
         common: global___CommonRequest | None = ...,
         resource_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "resource_id", b"resource_id"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "common", b"common", "resource_id", b"resource_id"
+        ],
+    ) -> None: ...
 
 global___DeleteRequest = DeleteRequest
 
@@ -374,7 +525,12 @@ class DeleteResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[DeleteResponse._Status.ValueType], builtins.type):  # noqa: F821
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            DeleteResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: DeleteResponse._Status.ValueType  # 0
         DELETED: DeleteResponse._Status.ValueType  # 1
@@ -396,8 +552,13 @@ class DeleteResponse(google.protobuf.message.Message):
         common: global___CommonResponse | None = ...,
         status: global___DeleteResponse.Status.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common", b"common"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common", b"common", "status", b"status"]) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["common", b"common"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["common", b"common", "status", b"status"],
+    ) -> None: ...
 
 global___DeleteResponse = DeleteResponse
 
@@ -416,7 +577,12 @@ class SubscribeToItemWSRequest(google.protobuf.message.Message):
         resource_id: builtins.str = ...,
         request_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["request_id", b"request_id", "resource_id", b"resource_id"]) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "request_id", b"request_id", "resource_id", b"resource_id"
+        ],
+    ) -> None: ...
 
 global___SubscribeToItemWSRequest = SubscribeToItemWSRequest
 
@@ -427,7 +593,12 @@ class SubscribeToItemWSResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SubscribeToItemWSResponse._Status.ValueType], builtins.type):  # noqa: F821
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            SubscribeToItemWSResponse._Status.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOT_FOUND: SubscribeToItemWSResponse._Status.ValueType  # 0
         SUBSCRIBED: SubscribeToItemWSResponse._Status.ValueType  # 1
@@ -446,7 +617,12 @@ class SubscribeToItemWSResponse(google.protobuf.message.Message):
         status: global___SubscribeToItemWSResponse.Status.ValueType = ...,
         request_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["request_id", b"request_id", "status", b"status"]) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "request_id", b"request_id", "status", b"status"
+        ],
+    ) -> None: ...
 
 global___SubscribeToItemWSResponse = SubscribeToItemWSResponse
 
@@ -457,7 +633,12 @@ class ItemEventWSPush(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ItemEventWSPush._EventType.ValueType], builtins.type):  # noqa: F821
+    class _EventTypeEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            ItemEventWSPush._EventType.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         CREATED: ItemEventWSPush._EventType.ValueType  # 0
         UPDATED: ItemEventWSPush._EventType.ValueType  # 1
@@ -475,6 +656,8 @@ class ItemEventWSPush(google.protobuf.message.Message):
         *,
         resource_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["resource_id", b"resource_id"]) -> None: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["resource_id", b"resource_id"]
+    ) -> None: ...
 
 global___ItemEventWSPush = ItemEventWSPush
