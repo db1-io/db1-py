@@ -28,10 +28,10 @@ Choose any key and replace "my_key":
 ~~~python
 import db1 
 item = db1.Item("my_key")  
-item.val = {
+item.set({
     "test_list" : [1, 2, 3, "four"],
     "test_array" : np.ones((3, 3)),
-}
+})
 ~~~
 
 
@@ -44,7 +44,7 @@ Click the link: [https://db1.io/?key=my_key](https://db1.io/?key=my_key). Or go 
 ~~~python
 import db1 
 item = db1.Item("my_key")  
-print(item.val)
+print(item.get())
 ~~~
 
 
