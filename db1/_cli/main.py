@@ -18,16 +18,16 @@ def main():
         help="Name of operation (e.g. set, get).",
     )
     parser.add_argument(
-        "id",
+        "key",
         type=str,
         nargs="?",
-        help="Resource path or ID (e.g. ~john/my_var, 1234-5678-9012-3456).",
+        help="Key of the item (e.g. some_item_key).",
     )
     parser.add_argument(
         "value",
         type=str,
         nargs="?",
-        help="Some resource operations require a value (e.g. 123, hello).",
+        help="Some operations require a value (e.g. 123, hello).",
     )
 
     # Argument flags (optional)

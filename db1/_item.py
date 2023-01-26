@@ -2,8 +2,8 @@
 
 from typing import Callable, Optional
 
-from db1.api import item
-from db1.api.item._utils import assert_valid_key
+from db1.api import _item
+from db1.api._item._utils import assert_valid_key
 from db1.serializer._types import PY_TYPES_
 
 
@@ -22,7 +22,7 @@ class Item:
 
     def __repr__(self) -> str:
         repr_string = (
-            f"DB1 Item with key: `{self.key}`\n" f"Check it out at: {self.url}"
+            f"DB1 Item with key: `{self.key}`\n" f"Check it out at: {self.get_url()}"
         )
         return repr_string
 
@@ -32,9 +32,9 @@ class Item:
         Raises:
             db1.api.exceptions.NotFoundError: If the item does not exist.
         """
-        item.delete(self.key)
+        _item.delete_item(self.key)
 
-    def get_value(self, max_size_bytes: Optional[int] = None) -> PY_TYPES_:
+    def get(self, max_size_bytes: Optional[int] = None) -> PY_TYPES_:
         """Get the value of the item.
 
         Args:
@@ -49,28 +49,17 @@ class Item:
             db1.api.exceptions.ItemValueTooBigError:
                 If the item value is bigger than `max_size_bytes`.
         """
-        return item.get_value(self.key, max_size_bytes=max_size_bytes)
+        return _item.get_item(self.key, max_size_bytes=max_size_bytes)
 
-    def set_value(self, value: PY_TYPES_) -> None:
+    def set(self, value: PY_TYPES_) -> None:
         """Set the value of the item.
 
         Args:
             value: The value to set.
         """
-        item.set_value(self.key, value)
+        _item.set_item(self.key, value)
 
-    def get_meta_variables(self) -> dict:
-        """Get the meta variables of the item.
-
-        Returns:
-            The meta variables of the item.
-
-        Raises:
-            db1.api.exceptions.NotFoundError: If the item does not exist.
-        """
-        return item.get_meta_variables(self.key)
-
-    def await_next_value(self) -> PY_TYPES_:
+    def await_next(self) -> PY_TYPES_:
         """Wait for the next value of the item.
 
         Returns:
@@ -81,7 +70,7 @@ class Item:
             db1.api.exceptions.ItemValueTooBigError:
                 If the item value is bigger than `max_size_bytes`.
         """
-        return item.await_next_value(self.key)
+        return _item.await_next_item(self.key)
 
     def listen(
         self,
@@ -109,7 +98,7 @@ class Item:
             db1.api.exceptions.ItemValueTooBigError:
                 If the item value is bigger than `max_size_bytes`.
         """
-        item.listen(
+        _item.listen(
             self.key,
             on_set_value=on_set_value,
             on_create=on_create,
@@ -127,53 +116,3 @@ class Item:
             The URL of the item.
         """
         return f"https://panel.db1.io/?key={self.key}"
-
-    @property
-    def val(self) -> PY_TYPES_:
-        """Get the value of the item.
-
-        See docstring of `item.get_value` for more information.
-        """
-        return self.get_value()
-
-    @val.setter
-    def val(self, value: PY_TYPES_) -> None:
-        """Set the value of the item.
-
-        See docstring of `item.set_value` for more information.
-        """
-        self.set_value(value)
-
-    @property
-    def meta_variables(self) -> dict:
-        """Get the meta variables of the item.
-
-        See docstring of `item.get_meta_variables` for more information.
-        """
-        return self.get_meta_variables()
-
-    @property
-    def next_val(self) -> PY_TYPES_:
-        """Wait for the next value of the item.
-
-        See docstring of `item.await_next_value` for more information.
-        """
-        return self.await_next_value()
-
-    @property
-    def url(self) -> str:
-        """Get the URL of the item.
-
-        See docstring of `item.get_url` for more information.
-        """
-        return self.get_url()
-
-    @property
-    def value(self) -> PY_TYPES_:
-        """ "Not implemented, use Item.val instead."""
-        raise NotImplementedError("Use Item.val instead.")
-
-    @value.setter
-    def value(self, value: PY_TYPES_) -> None:
-        """ "Not implemented, use Item.val instead."""
-        raise NotImplementedError("Use Item.val instead.")
