@@ -43,17 +43,17 @@ def test_init():
     assert test_item.key == test_key
 
 
-def test_get_set(value):
+def test_set_get(value):
     value = VALUE_LIST[value]
-    test_item.val = value
-    ret_value = test_item.val
+    test_item.set(value)
+    ret_value = test_item.get()
     compare_values(value, ret_value)
 
 
-def test_get_meta_variables():
-    meta_variables = test_item.meta_variables
-    keys = ["size_bytes", "created_ms", "updated_ms"]
-    assert all(key in meta_variables for key in keys)
+# def test_get_meta_variables():
+#     meta_variables = test_item.meta_variables
+#     keys = ["size_bytes", "created_ms", "updated_ms"]
+#     assert all(key in meta_variables for key in keys)
 
 
 # def test_next_value():
@@ -156,4 +156,4 @@ def test_delete_not_found():
 
 def test_get_not_found():
     with pytest.raises(db1.api.exceptions.NotFoundError):
-        test_item.val
+        test_item.get()

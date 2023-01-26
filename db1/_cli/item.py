@@ -1,50 +1,40 @@
 """DB1 CLI script for resource item."""
 
-from db1.api.item import await_next_value, create, delete, get_value, listen, set_value
-
-
-# Handle operation create
-def handle_operation_create(args):
-    resource_id = args["id"]
-    create(resource_id)
-    print("Item with resource_id " + resource_id + " created.")
+from db1.api._item import await_next_item, delete_item, get_item, listen, set_item
 
 
 # Handle operation delete
 def handle_operation_delete(args):
-    resource_id = args["id"]
-    delete(resource_id)
-    print("Item with resource_id " + resource_id + " deleted.")
+    key = args["key"]
+    delete_item(key)
+    print("Item with key " + key + " deleted.")
 
 
 # Handle operation get_value
 def handle_operation_get_value(args):
-    resource_id = args["id"]
-    print(get_value(resource_id))
+    key = args["key"]
+    print(get_item(key))
 
 
 # Handle operation set_value
 def handle_operation_set_value(args):
-    resource_id = args["id"]
+    key = args["key"]
     if not args["value"]:
-        print("Positional argument `value` is required on `set_value`.\n")
+        print("Positional argument `value` is required on `set`.\n")
         print_missing_value()
         return
 
     value = args["value"]
-    set_value(resource_id, value)
-    print("Value " + value + " set on item with ID " + resource_id + ".")
+    set_item(key, value)
+    print("Value " + value + " set on item with key " + key + ".")
 
 
 # Handle operation listen
 def handle_operation_listen(args):
-    resource_id = args["id"]
+    key = args["key"]
 
     def print_set_value(value):
         print("Value set to " + value)
-
-    def print_create():
-        print("Item created")
 
     def print_delete():
         print("Item deleted")
@@ -59,9 +49,8 @@ def handle_operation_listen(args):
         print("Connection closed: " + close_msg + " " + close_status_code)
 
     listen(
-        resource_id,
+        key,
         on_set_value=print_set_value,
-        on_create=print_create,
         on_delete=print_delete,
         on_open=print_open,
         on_error=print_error,
@@ -71,12 +60,11 @@ def handle_operation_listen(args):
 
 # Handle operation await_next_value
 def handle_operation_await_next_value(args):
-    resource_id = args["id"]
-    print(await_next_value(resource_id))
+    key = args["key"]
+    print(await_next_item(key))
 
 
 OPERATIONS = [
-    ["create", "db1 create", handle_operation_create],
     ["delete", "db1 delete", handle_operation_delete],
     ["get", "db1 get", handle_operation_get_value],
     ["set", "db1 set", handle_operation_set_value],
@@ -97,8 +85,8 @@ def handle_resource_item(args):
         print_available_operations()
         return
 
-    if not args["id"]:
-        print("Positional argument `id` is required.\n")
+    if not args["key"]:
+        print("Positional argument `key` is required.\n")
         print_missing_id()
         return
 
@@ -121,10 +109,10 @@ def print_available_operations():
 
 
 def print_missing_id():
-    print("Example: \n db1 get some_path\n")
+    print("Example: \n db1 get some_item_key\n")
     return
 
 
 def print_missing_value():
-    print("Example: \n db1 set some_path 123\n")
+    print("Example: \n db1 set some_item_key 123\n")
     return

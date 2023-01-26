@@ -3,20 +3,20 @@
 import json
 from typing import Callable, Optional
 
-from db1.api._environment_vars import DB1_API_ITEM_WEBSOCKET_URL
-from db1.api._websocket import make_ws_connection
-from db1.api.item._rest.rest_functions import get_value
+from db1.api._item._rest.rest_functions import get_item
+from db1.api._websocket_utils import make_ws_connection
+from db1.api.environment_vars import DB1_API_ITEM_WEBSOCKET_URL
 from db1.serializer._types import PY_TYPES_
 
 
-def await_next_value(resource_id: str) -> Optional[PY_TYPES_]:
+def await_next_item(key: str) -> Optional[PY_TYPES_]:
     """Await next value of item.
 
     A very simple functions without any error handling.
     Use `listen` for more advanced use cases.
 
     Args:
-        resource_id: The resource ID of the item.
+        key: The key of the item.
 
     Returns:
         The new value of the item or None if the connection was closed or if an error occurred.
@@ -36,17 +36,17 @@ def await_next_value(resource_id: str) -> Optional[PY_TYPES_]:
 
     make_ws_connection(
         DB1_API_ITEM_WEBSOCKET_URL,
-        resource_id,
+        key,
         on_message=on_message,
     )
     if value_set:
-        return get_value(resource_id)
+        return get_item(key)
 
     return None
 
 
 def listen(
-    resource_id: str,
+    key: str,
     on_set_value: Optional[Callable[[PY_TYPES_], None]] = None,
     on_create: Optional[Callable[[], None]] = None,
     on_delete: Optional[Callable[[], None]] = None,
@@ -58,7 +58,7 @@ def listen(
     """Listen for updates of an item value.
 
     Args:
-        resource_id: The resource ID of the item.
+        key: The key of the item.
         on_set_value: A callback that is called when the value of the item is set.
         on_create: A callback that is called when the item is created.
         on_delete: A callback that is called when the item is deleted.
@@ -76,7 +76,7 @@ def listen(
         message_dict = json.loads(message)
         if message_dict["event_type"] == "set":
             if on_set_value is not None:
-                on_set_value(get_value(resource_id))
+                on_set_value(get_item(key))
         elif message_dict["event_type"] == "create":
             if on_create is not None:
                 on_create()
@@ -98,7 +98,7 @@ def listen(
 
     make_ws_connection(
         DB1_API_ITEM_WEBSOCKET_URL,
-        resource_id,
+        key,
         on_message=_on_message,
         on_error=_on_error,
         on_close=_on_close,
