@@ -5,7 +5,7 @@ from typing import Callable, Optional
 
 from db1.api._item._rest.rest_functions import get_item
 from db1.api._websocket_utils import make_ws_connection
-from db1.api.environment_vars import DB1_API_ITEM_WEBSOCKET_URL
+from db1.api.environment_vars import DB1_WS_URL
 from db1.serializer._types import PY_TYPES_
 
 
@@ -35,7 +35,7 @@ def await_next_item(key: str) -> Optional[PY_TYPES_]:
             ws.close()
 
     make_ws_connection(
-        DB1_API_ITEM_WEBSOCKET_URL,
+        DB1_WS_URL,
         key,
         on_message=on_message,
     )
@@ -97,7 +97,7 @@ def listen(
             on_open()
 
     make_ws_connection(
-        DB1_API_ITEM_WEBSOCKET_URL,
+        DB1_WS_URL,
         key,
         on_message=_on_message,
         on_error=_on_error,
