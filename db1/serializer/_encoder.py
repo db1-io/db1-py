@@ -182,9 +182,4 @@ def encode(py_value: PY_TYPES_) -> pb.Value:
 
 def decode(pb_value: pb.Value) -> PY_TYPES_:
     """Decode a Value proto to a Python value."""
-    for type_idx, decoder in enumerate(_DECODERS):
-        if pb_value.type == type_idx + 1:
-            py_value = decoder(pb_value)
-            return py_value
-
-    raise Exception("")
+    return _DECODERS[pb_value.type - 1](pb_value)
