@@ -7,10 +7,11 @@ from db1.api import exceptions
 from db1.api._http_utils import make_http_request
 from db1.api._item._utils import check_common_status
 from db1.api.environment_vars import (
-    DB1_API_ITEM_CREATE_URL,
-    DB1_API_ITEM_DELETE_URL,
-    DB1_API_ITEM_GET_URL,
-    DB1_API_ITEM_SET_URL,
+    DB1_HTTP_CREATE_ENDPOINT,
+    DB1_HTTP_DELETE_ENDPOINT,
+    DB1_HTTP_GET_ENDPOINT,
+    DB1_HTTP_SET_ENDPOINT,
+    DB1_HTTP_UPDATE_METAVARIABLES_ENDPOINT,
 )
 
 
@@ -21,7 +22,7 @@ def create_request(resource_id: str):
     request.resource_id = resource_id
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_CREATE_URL, encoded_request)
+    http_response = make_http_request(DB1_HTTP_CREATE_ENDPOINT, encoded_request)
     response = pb.CreateResponse()
     response.ParseFromString(http_response.content)
 
@@ -44,7 +45,7 @@ def delete_request(resource_id: str):
     request.resource_id = resource_id
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_DELETE_URL, encoded_request)
+    http_response = make_http_request(DB1_HTTP_DELETE_ENDPOINT, encoded_request)
     response = pb.DeleteResponse()
     response.ParseFromString(http_response.content)
 
@@ -76,7 +77,7 @@ def get_value_request(
         request.max_size_bytes = max_size_bytes
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_GET_URL, encoded_request)
+    http_response = make_http_request(DB1_HTTP_GET_ENDPOINT, encoded_request)
     response = pb.GetResponse()
     response.ParseFromString(http_response.content)
 
@@ -111,7 +112,7 @@ def get_meta_variables_request(resource_id: str) -> Tuple:
     request.without_item_value = True
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_GET_URL, encoded_request)
+    http_response = make_http_request(DB1_HTTP_GET_ENDPOINT, encoded_request)
     response = pb.GetResponse()
     response.ParseFromString(http_response.content)
 
@@ -146,7 +147,7 @@ def get_value_and_meta_variables_request(
         request.max_size_bytes = max_size_bytes
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_GET_URL, encoded_request)
+    http_response = make_http_request(DB1_HTTP_GET_ENDPOINT, encoded_request)
     response = pb.GetResponse()
     response.ParseFromString(http_response.content)
 
@@ -181,7 +182,7 @@ def set_value_request(resource_id: str, item_value: bytes) -> None:
     request.item_value = item_value
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_SET_URL, encoded_request)
+    http_response = make_http_request(DB1_HTTP_SET_ENDPOINT, encoded_request)
     response = pb.SetResponse()
     response.ParseFromString(http_response.content)
 
@@ -212,7 +213,9 @@ def update_meta_variables_request(
         metavarible.value = value
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_SET_URL, encoded_request)
+    http_response = make_http_request(
+        DB1_HTTP_UPDATE_METAVARIABLES_ENDPOINT, encoded_request
+    )
     response = pb.UpdateMetavariblesResponse()
     response.ParseFromString(http_response.content)
 
@@ -243,7 +246,9 @@ def delete_meta_variables_request(
         metavarible.delete = True
     encoded_request = request.SerializeToString()
 
-    http_response = make_http_request(DB1_API_ITEM_SET_URL, encoded_request)
+    http_response = make_http_request(
+        DB1_HTTP_UPDATE_METAVARIABLES_ENDPOINT, encoded_request
+    )
     response = pb.UpdateMetavariblesResponse()
     response.ParseFromString(http_response.content)
 
