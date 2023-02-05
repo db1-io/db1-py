@@ -8,6 +8,10 @@ class DB1ApiError(Exception):
     """Base class for all db1 api errors."""
 
 
+class HttpError(DB1ApiError):
+    """Used to indicate an http error."""
+
+
 class InternalServerError(DB1ApiError):
     """Used to indicate internal server error."""
 
