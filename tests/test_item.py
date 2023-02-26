@@ -17,18 +17,25 @@ def value(request):
 
 
 def test_invalid_key():
+    item = db1.Item("-invalid_key-")
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
-        db1.Item("-invalid_key-")
+        item.set("test")
+
+    item = db1.Item("invalid_key@")
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
-        db1.Item("invalid_key@")
+        item.set("test")
+
+    item = db1.Item("inval?d_key")
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
-        db1.Item("inval?d_key")
+        item.set("test")
+
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
         too_long_key = (
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         )
         db1.Item(too_long_key)
+
     with pytest.raises(db1.api.exceptions.InvalidKeyError):
         db1.Item("")
 

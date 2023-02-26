@@ -13,6 +13,7 @@ from db1.api._item._rest.rest_requests import (
     set_value_request,
     update_meta_variables_request,
 )
+from db1.api._item._utils import assert_valid_key, assert_valid_public_key
 from db1.serializer._serializer import dumps, loads
 from db1.serializer._types import PY_TYPES_
 
@@ -25,7 +26,9 @@ def _create_item(key: str) -> None:
 
     Raises:
         db1.api.exceptions.AlreadyExistsError: If the item already exists.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_public_key(key)
     create_request(key)
 
 
@@ -37,7 +40,9 @@ def delete_item(key: str) -> None:
 
     Raises:
         db1.api.exceptions.NotFoundError: If the item does not exist.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_public_key(key)
     delete_request(key)
 
 
@@ -54,7 +59,9 @@ def get_item(key: str, max_size_bytes: Optional[int] = None) -> PY_TYPES_:
     Raises:
         db1.api.exceptions.NotFoundError: If the item does not exist.
         db1.api.exceptions.ItemValueTooBigError: If the item value is bigger than `max_size_bytes`.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_key(key)
     item_value, _, _, _ = get_value_request(key, max_size_bytes)
     return loads(item_value)
 
@@ -72,11 +79,12 @@ def get_item_meta_variables(
 
     Raises:
         db1.api.exceptions.NotFoundError: If the item does not exist.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_key(key)
     _meta_variables, size_bytes, created_ms, updated_ms = get_meta_variables_request(
         key
     )
-
     meta_variables = {
         "size_bytes": size_bytes,
         "created_ms": created_ms,
@@ -102,7 +110,9 @@ def get_item_and_meta_variables(
     Raises:
         db1.api.exceptions.NotFoundError: If the item does not exist.
         db1.api.exceptions.ItemValueTooBigError: If the item value is bigger than `max_size_bytes`.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_key(key)
     (
         item_value,
         _meta_variables,
@@ -110,7 +120,6 @@ def get_item_and_meta_variables(
         created_ms,
         updated_ms,
     ) = get_value_and_meta_variables_request(key, max_size_bytes)
-
     meta_variables = {
         "size_bytes": size_bytes,
         "created_ms": created_ms,
@@ -129,7 +138,9 @@ def set_item(key: str, value: PY_TYPES_) -> None:
 
     Raises:
         db1.api.exceptions.NotFoundError: If the item does not exist.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_public_key(key)
     ser_value = dumps(value)
     try:
         set_value_request(key, ser_value)
@@ -150,7 +161,9 @@ def update_item_meta_variables(
 
     Raises:
         db1.api.exceptions.NotFoundError: If the item does not exist.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_public_key(key)
     update_meta_variables_request(key, meta_variables)
 
 
@@ -165,5 +178,7 @@ def delete_item_meta_variables(
 
     Raises:
         db1.api.exceptions.NotFoundError: If the item does not exist.
+        db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
+    assert_valid_public_key(key)
     delete_meta_variables_request(key, meta_variable_keys)
