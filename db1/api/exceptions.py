@@ -31,14 +31,6 @@ class NotFoundError(DB1ApiError):
     """Used to indicate that a resource does not exist."""
 
 
-class WebSocketError(DB1ApiError):
-    """Used to indicate that a websocket error occurred."""
-
-
-class WebSocketClosedError(DB1ApiError):
-    """Used to indicate that a websocket connection was closed."""
-
-
 class ItemValueTooBigError(DB1ApiError):
     """Used to indicate that an item value is larger than `max_size_bytes`."""
 

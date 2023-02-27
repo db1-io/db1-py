@@ -15,7 +15,7 @@ def main():
         "operation",
         type=str,
         nargs="?",
-        help="Name of operation (e.g. set, get).",
+        help="Name of operation (e.g. set, get, delete).",
     )
     parser.add_argument(
         "key",
