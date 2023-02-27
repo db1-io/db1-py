@@ -1,5 +1,7 @@
 """DB1 CLI script for resource item."""
 
+import json
+
 from db1.api._item import delete_item, get_item, set_item
 
 
@@ -7,13 +9,21 @@ from db1.api._item import delete_item, get_item, set_item
 def handle_operation_delete(args):
     key = args["key"]
     delete_item(key)
-    print("Item with key " + key + " deleted.")
 
 
 # Handle operation get_value
 def handle_operation_get_value(args):
     key = args["key"]
-    print(get_item(key))
+
+    # Try to encode as json
+    item = get_item(key)
+    try:
+        if args["pretty_print"]:
+            print(json.dumps(item, indent=4))
+        else:
+            print(json.dumps(item))
+    except TypeError:
+        print(item)
 
 
 # Handle operation set_value
@@ -24,7 +34,12 @@ def handle_operation_set_value(args):
         print_missing_value()
         return
 
-    value = args["value"]
+    # Try to decode as json
+    try:
+        value = json.loads(args["value"])
+    except json.JSONDecodeError:
+        value = args["value"]
+
     set_item(key, value)
 
 
