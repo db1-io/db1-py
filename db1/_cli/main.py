@@ -54,7 +54,7 @@ def main():
     args = vars(parser.parse_args())
 
     if args["version"]:
-        print("0.1.3")
+        print("0.1.4")
         return
 
     handle_resource_item(args)
