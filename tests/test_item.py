@@ -38,6 +38,13 @@ def test_invalid_key():
 test_key: str = str(uuid.uuid4())
 
 
+def test_serializer(value):
+    value = VALUE_LIST[value]
+    ser_value = db1.serializer.dumps(value)
+    ret_value = db1.serializer.loads(ser_value)
+    compare_values(value, ret_value)
+
+
 def test_client():
     test_value = "test"
     DB1[test_key] = test_value
@@ -45,6 +52,20 @@ def test_client():
     compare_values(test_value, ret_value)
     del DB1[test_key]
     repr(DB1)
+
+
+def test_get_item_and_meta_variables():
+    test_value = "test"
+    DB1[test_key] = test_value
+    ret_value, meta_variables = db1.get_item_and_meta_variables(test_key)
+    compare_values(test_value, ret_value)
+    assert all(
+        key in meta_variables for key in ["size_bytes", "created_ms", "updated_ms"]
+    )
+    assert type(meta_variables["size_bytes"]) == int
+    assert type(meta_variables["created_ms"]) == int
+    assert type(meta_variables["updated_ms"]) == int
+    del DB1[test_key]
 
 
 def test_set_get(value):
