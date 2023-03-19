@@ -38,6 +38,11 @@ def test_invalid_key():
 test_key: str = str(uuid.uuid4())
 
 
+def test_get_url():
+    url = db1.get_url(test_key)
+    assert url == f"{db1.api.environment_vars.DB1_PANEL_URL}/?key={test_key}"
+
+
 def test_serializer(value):
     value = VALUE_LIST[value]
     ser_value = db1.serializer.dumps(value)
