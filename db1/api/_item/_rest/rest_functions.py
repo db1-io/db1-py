@@ -1,35 +1,15 @@
 """Item REST API user interface functions."""
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 
-from db1.api import exceptions
 from db1.api._item._rest.rest_requests import (
-    create_request,
-    delete_meta_variables_request,
     delete_request,
-    get_meta_variables_request,
-    get_value_and_meta_variables_request,
     get_value_request,
     set_value_request,
-    update_meta_variables_request,
 )
 from db1.api._item._utils import assert_valid_key, assert_valid_public_key
 from db1.serializer._serializer import dumps, loads
 from db1.serializer._types import PY_TYPES_
-
-
-def _create_item(key: str) -> None:
-    """Create an item.
-
-    Args:
-        key: The key of the item.
-
-    Raises:
-        db1.api.exceptions.AlreadyExistsError: If the item already exists.
-        db1.api.exceptions.InvalidKeyError: If the key is invalid.
-    """
-    assert_valid_public_key(key)
-    create_request(key)
 
 
 def delete_item(key: str) -> None:
@@ -66,34 +46,6 @@ def get_item(key: str, max_size_bytes: Optional[int] = None) -> PY_TYPES_:
     return loads(item_value)
 
 
-def get_item_meta_variables(
-    key: str,
-) -> Dict:
-    """Get the meta variables of an item.
-
-    Args:
-        key: The key of the item.
-
-    Returns:
-        The meta variables of the item.
-
-    Raises:
-        db1.api.exceptions.NotFoundError: If the item does not exist.
-        db1.api.exceptions.InvalidKeyError: If the key is invalid.
-    """
-    assert_valid_key(key)
-    _meta_variables, size_bytes, created_ms, updated_ms = get_meta_variables_request(
-        key
-    )
-    meta_variables = {
-        "size_bytes": size_bytes,
-        "created_ms": created_ms,
-        "updated_ms": updated_ms,
-        **{meta_variable.key: meta_variable.value for meta_variable in _meta_variables},
-    }
-    return meta_variables
-
-
 def get_item_and_meta_variables(
     key: str,
     max_size_bytes: Optional[int] = None,
@@ -113,20 +65,15 @@ def get_item_and_meta_variables(
         db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
     assert_valid_key(key)
-    (
-        item_value,
-        _meta_variables,
-        size_bytes,
-        created_ms,
-        updated_ms,
-    ) = get_value_and_meta_variables_request(key, max_size_bytes)
+    item_value, size_bytes, created_ms, updated_ms = get_value_request(
+        key, max_size_bytes
+    )
     meta_variables = {
         "size_bytes": size_bytes,
         "created_ms": created_ms,
         "updated_ms": updated_ms,
-        **{meta_variable.key: meta_variable.value for meta_variable in _meta_variables},
     }
-    return item_value, meta_variables
+    return loads(item_value), meta_variables
 
 
 def set_item(key: str, value: PY_TYPES_) -> None:
@@ -142,43 +89,4 @@ def set_item(key: str, value: PY_TYPES_) -> None:
     """
     assert_valid_public_key(key)
     ser_value = dumps(value)
-    try:
-        set_value_request(key, ser_value)
-    except exceptions.NotFoundError:
-        _create_item(key)
-        set_value_request(key, ser_value)
-
-
-def update_item_meta_variables(
-    key: str,
-    meta_variables: Dict[str, str],
-) -> None:
-    """Update the meta variables of an item.
-
-    Args:
-        key: The key of the item.
-        meta_variables: The meta variables of the item.
-
-    Raises:
-        db1.api.exceptions.NotFoundError: If the item does not exist.
-        db1.api.exceptions.InvalidKeyError: If the key is invalid.
-    """
-    assert_valid_public_key(key)
-    update_meta_variables_request(key, meta_variables)
-
-
-def delete_item_meta_variables(
-    key: str,
-    meta_variable_keys: List[str],
-) -> None:
-    """Delete the meta variables of an item.
-
-    Args:
-        key: The key of the item.
-
-    Raises:
-        db1.api.exceptions.NotFoundError: If the item does not exist.
-        db1.api.exceptions.InvalidKeyError: If the key is invalid.
-    """
-    assert_valid_public_key(key)
-    delete_meta_variables_request(key, meta_variable_keys)
+    set_value_request(key, ser_value)
