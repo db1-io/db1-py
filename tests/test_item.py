@@ -64,9 +64,7 @@ def test_get_item_and_meta_variables():
     DB1[test_key] = test_value
     ret_value, meta_variables = db1.get_item_and_meta_variables(test_key)
     compare_values(test_value, ret_value)
-    assert all(
-        key in meta_variables for key in ["size_bytes", "created_ms", "updated_ms"]
-    )
+    assert all(key in meta_variables for key in ["size_bytes", "created_ms", "updated_ms"])
     assert type(meta_variables["size_bytes"]) == int
     assert type(meta_variables["created_ms"]) == int
     assert type(meta_variables["updated_ms"]) == int

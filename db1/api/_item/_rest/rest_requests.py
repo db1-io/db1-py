@@ -27,9 +27,7 @@ def delete_request(resource_id: str):
     check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.DeleteResponse.Status.NOT_FOUND:
-        raise exceptions.NotFoundError(
-            f"An item with resource id `{resource_id}` does not exist."
-        )
+        raise exceptions.NotFoundError(f"An item with resource id `{resource_id}` does not exist.")
     if response.status == pb.DeleteResponse.Status.INVALID_RESOURCE_ID:
         raise exceptions.InvalidKeyError(f"The resource id `{resource_id}` is invalid.")
     if response.status == pb.DeleteResponse.Status.DELETED:
@@ -59,9 +57,7 @@ def get_value_request(
     check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.GetResponse.Status.NOT_FOUND:
-        raise exceptions.NotFoundError(
-            f"An item with resource id `{resource_id}` does not exist."
-        )
+        raise exceptions.NotFoundError(f"An item with resource id `{resource_id}` does not exist.")
     if response.status == pb.GetResponse.Status.FOUND:
         pass
 
@@ -93,9 +89,7 @@ def set_value_request(resource_id: str, item_value: bytes) -> None:
     check_common_status(response.common.status, response.common.message)
 
     if response.status == pb.SetResponse.Status.NOT_FOUND:
-        raise exceptions.NotFoundError(
-            f"An item with resource id `{resource_id}` does not exist."
-        )
+        raise exceptions.NotFoundError(f"An item with resource id `{resource_id}` does not exist.")
     if response.status == pb.SetResponse.Status.INVALID_RESOURCE_ID:
         raise exceptions.InvalidKeyError(f"Invalid resource id `{resource_id}`.")
     if response.status != pb.SetResponse.Status.UPDATED:

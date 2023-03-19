@@ -65,9 +65,7 @@ def get_item_and_meta_variables(
         db1.api.exceptions.InvalidKeyError: If the key is invalid.
     """
     assert_valid_key(key)
-    item_value, size_bytes, created_ms, updated_ms = get_value_request(
-        key, max_size_bytes
-    )
+    item_value, size_bytes, created_ms, updated_ms = get_value_request(key, max_size_bytes)
     meta_variables = {
         "size_bytes": size_bytes,
         "created_ms": created_ms,

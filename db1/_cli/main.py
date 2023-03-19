@@ -8,13 +8,13 @@ from db1._cli.item import handle_resource_item
 def main():
     """Main entry point for the DB1 CLI."""
 
-    DESCRIPTION = (
+    description = (
         "DB1 Command Line Interface (CLI).\n\n"
         "On set values are attempted to be decoded as JSON, otherwise as strings.\n"
         "On get values are attempted to be encoded as JSON, otherwise using the print function.\n"
     )
     parser = argparse.ArgumentParser(
-        description=DESCRIPTION, formatter_class=argparse.RawTextHelpFormatter
+        description=description, formatter_class=argparse.RawTextHelpFormatter
     )
 
     # Positional arguments

@@ -1,10 +1,12 @@
 name: Python application
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, pull_request]
+
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
 
 permissions:
   contents: read
@@ -34,12 +36,9 @@ jobs:
     - name: Type check with mypy
       run: |
         mypy .
-    - name: Format code with black
+    - name: Lint with Ruff
       run: |
-        black .
-    - name: Lint with flake8
-      run: |
-        flake8 .
+        ruff check .
     - name: Test with pytest
       run: |
         pytest -vv -s ./tests/test_item.py
