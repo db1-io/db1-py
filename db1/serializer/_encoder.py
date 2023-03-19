@@ -18,8 +18,7 @@ def _encode_int(py_value: int) -> pb.Value:
 
 
 def _decode_int(pb_value: pb.Value) -> int:
-    py_value = pb_value.int64_
-    return py_value
+    return pb_value.int64_
 
 
 def _encode_float(py_value: float) -> pb.Value:
@@ -30,8 +29,7 @@ def _encode_float(py_value: float) -> pb.Value:
 
 
 def _decode_float(pb_value: pb.Value) -> float:
-    py_value = pb_value.float_
-    return py_value
+    return pb_value.float_
 
 
 def _encode_string(py_value: str) -> pb.Value:
@@ -42,8 +40,7 @@ def _encode_string(py_value: str) -> pb.Value:
 
 
 def _decode_string(pb_value: pb.Value) -> str:
-    py_value = pb_value.string_
-    return py_value
+    return pb_value.string_
 
 
 def _encode_bool(py_value: bool) -> pb.Value:
@@ -54,8 +51,7 @@ def _encode_bool(py_value: bool) -> pb.Value:
 
 
 def _decode_bool(pb_value: pb.Value) -> bool:
-    py_value = pb_value.bool_
-    return py_value
+    return pb_value.bool_
 
 
 def _encode_bytes(py_value: bytes) -> pb.Value:
@@ -66,8 +62,7 @@ def _encode_bytes(py_value: bytes) -> pb.Value:
 
 
 def _decode_bytes(pb_value: pb.Value) -> bytes:
-    py_value = pb_value.bytes_
-    return py_value
+    return pb_value.bytes_
 
 
 def _encode_list(py_value: List) -> pb.Value:
@@ -140,8 +135,7 @@ def _encode_dataframe(py_value: pd.DataFrame) -> pb.Value:
 def _decode_dataframe(pb_value: pb.Value) -> pd.DataFrame:
     buf = pa.py_buffer(pb_value.bytes_)
     with pa.ipc.open_stream(buf) as reader:
-        py_value = reader.read_pandas()
-    return py_value
+        return reader.read_pandas()
 
 
 _ENCODERS: List[Callable[[Any], pb.Value]] = [

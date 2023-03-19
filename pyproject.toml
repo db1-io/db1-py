@@ -1,0 +1,11 @@
+[tool.ruff]
+select = ["E", "F", "I", "N", "RSE", "RET", "TCH", "ARG", "RUF"]
+line-length = 101
+exclude = [
+    "db1/_protos/"
+]
+
+[tool.mypy]
+python_version = 3.9
+ignore_missing_imports = true
+exclude = "build/"
