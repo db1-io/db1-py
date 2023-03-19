@@ -6,7 +6,7 @@ from db1.api._item import delete_item, get_item, set_item
 from db1.serializer._types import PY_TYPES_
 
 
-class DB1_:
+class DB1Client:
     """DB1 object.
 
     Attributes:
@@ -70,5 +70,5 @@ class DB1_:
         delete_item(key)
 
 
-DB1 = DB1_()
+DB1 = DB1Client()
 """DB1 object."""
