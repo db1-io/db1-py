@@ -20,7 +20,7 @@ setup(
         "numpy",
         "pyarrow",
         "pandas",
-        "protobuf",
+        "protobuf>=3.20.0",
         "requests",
         "websocket-client",
     ],
