@@ -40,6 +40,6 @@ Go to [https://db1.io/](https://db1.io/) and enter your key in the text field.
 
 ### 4. Embed item in Notion
 
-To embed the item above in your Notion page, simply paste the URL [https://db1.io/?key=@example/nested_data_struct](https://db1.io/?key=@example/nested_data_struct) in any page and click “Create embed”.
+To embed the item above in your Notion page, simply paste the URL [https://db1.io/?key=example_key](https://db1.io/?key=example_key) in any page and click “Create embed”.
 
 Notion [examples](https://db1-io.notion.site/Embed-live-DB1-item-in-Notion-a3b1b8a7face4e9aa1bc527881ffd779#ac1e7313c0334d5cb1859dd02d248aaa).
