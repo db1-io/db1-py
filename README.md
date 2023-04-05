@@ -1,60 +1,45 @@
 # DB1
 
-DB1 is a simple to use cloud key-value database for storing, sharing and visualizing data items. All items are stored in the same global address space making them easily shareable with co-workers  and friends.
-
-### Example Items
-
-Here are some example items you can view in the browser or fetch with the python client:
-
-- [@example/dataframe](https://db1.io/?key=@example/dataframe)
-- [@example/nested_data_struct](https://db1.io/?key=@example/nested_data_struct)
-- [@example/numpy_image](https://db1.io/?key=@example/numpy_image)
-- [@example/live_values](https://db1.io/?key=@example/live_values)
+Store one item in the cloud with one line. No login. Share, visualize and embed live view in Notion.
 
 
-## Installation
+## Getting started
 
+DB1 is like a global python dict. Upload anything, access anywhere. For Javascript client, CLI and more examples see [documentation](https://db1-io.notion.site/DB1-Documentation-f5942d3984f7456ca49fba70c971bbf6).
+
+
+### 1. Install
 ~~~bash
 pip install db1
 ~~~
 
 
-## Getting started
+### 2. Upload and retreive data
+Choose a key and replace '@example/nested_data_struct' with your own.
+~~~
+from db1 import DB1
+import numpy as np
 
-**1. Store an item to the cloud**
+# upload anything
+DB1['@example/nested_data_struct'] = {
+    "message" : "Hey, I'm using DB1! 🤙",
+    "temperature" : 21.2421,
+    "numbers" : [1, 2, 3, "four"],
+    "matrix" : np.eye(5)
+}
 
-Choose any key and replace "my_key":
-
-~~~python
-import db1 
-item = db1.Item("my_key")  
-item.set({
-    "test_list" : [1, 2, 3, "four"],
-    "test_array" : np.ones((3, 3)),
-})
+# retreive anywhere
+my_value = DB1['@example/nested_data_struct']
 ~~~
 
 
-**2. View your item in the browser**
+### 3. View your item in the browser
 
-Click the link: [https://db1.io/?key=my_key](https://db1.io/?key=my_key). Or go to [https://db1.io](https://db1.io) and enter your key in the search bar.
-
-
-**3. Share your item or retrieve it at a later time**
-~~~python
-import db1 
-item = db1.Item("my_key")  
-print(item.get())
-~~~
+Go to [https://db1.io/](https://db1.io/) and enter your key in the text field.
 
 
-## Community
+### 4. Embed item in Notion
 
-Join our [discord server](https://discord.gg/xRrYZhCbx4) to discuss new features and help shape the future of DB1! You can also drop us an email at [hello@db1.io](mailto:hello@db1.io).
+To embed the item above in your Notion page, simply paste the URL [https://db1.io/?key=@example/nested_data_struct](https://db1.io/?key=@example/nested_data_struct) in any page and click “Create embed”.
 
-
-
-## FAQ
-
-### What data types are supported?
-The currently supported data types are the built-in **str**, **int**, **float**, **bytes**, **bool**, **dict**, **list** as well as **numpy array** and **pandas dataframe**.
+Notion [examples](https://db1-io.notion.site/Embed-live-DB1-item-in-Notion-a3b1b8a7face4e9aa1bc527881ffd779#ac1e7313c0334d5cb1859dd02d248aaa).
