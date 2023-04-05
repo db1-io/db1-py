@@ -14,7 +14,7 @@ pip install db1
 ~~~
 
 
-### 2. Upload and retreive data
+### 2. Upload and retrieve data
 Choose a key and replace 'example_key' with your own.
 ~~~
 from db1 import DB1
@@ -28,7 +28,7 @@ DB1['example_key'] = {
     "matrix" : np.eye(5)
 }
 
-# retreive anywhere
+# retrieve anywhere
 my_value = DB1['example_key']
 ~~~
 
