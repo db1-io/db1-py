@@ -15,13 +15,13 @@ pip install db1
 
 
 ### 2. Upload and retreive data
-Choose a key and replace '@example/nested_data_struct' with your own.
+Choose a key and replace 'example_key' with your own.
 ~~~
 from db1 import DB1
 import numpy as np
 
 # upload anything
-DB1['@example/nested_data_struct'] = {
+DB1['example_key'] = {
     "message" : "Hey, I'm using DB1! 🤙",
     "temperature" : 21.2421,
     "numbers" : [1, 2, 3, "four"],
@@ -29,7 +29,7 @@ DB1['@example/nested_data_struct'] = {
 }
 
 # retreive anywhere
-my_value = DB1['@example/nested_data_struct']
+my_value = DB1['example_key']
 ~~~
 
 
